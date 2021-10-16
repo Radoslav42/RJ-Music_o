@@ -2,6 +2,15 @@ h1{
     font-family: "Brush Script MT";
     font-size: 60px;
 }
+h1, h2{
+    color: #a1f0dd;
+}
+h2 {
+    font-size: 50px;
+}
+p {
+    color: #e1fff5;
+}
 body{
     background-color: #1d2226;
     position: relative;
