@@ -13,12 +13,16 @@ p {
 }
 body{
     position: relative;
-    background-image: url("/Resources/Images/BackgroundBody1.jpg");
+    background-image: url("Resources/Images/BackgroundBody.jpg");
     background-position: center;
 }
 #loginContainer {
     margin-top: 8em;
 }
+#userContainer {
+    margin-top: 1em;
+}
+
 
 #carouselWithCaptions{
     position: absolute;
@@ -35,7 +39,7 @@ body{
 
 }
 .nav-link:hover  {
-    font-size: larger;
+    color: #a1f0dd!important;
 }
 .nav-link  {
     color: #656565!important;
@@ -46,13 +50,13 @@ body{
 label {
     color: #e1fff5;
 }
-#buttonloginForm {
+#buttonForm {
     color: #a1f0dd ;
     background-color:#38423f;
     border-color: black;
     margin-top: 1rem;
 }
-#buttonloginForm:hover {
+#buttonForm:hover {
     background-color: #2a6130;
     border-color: #a1f0dd;
 

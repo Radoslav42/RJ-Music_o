@@ -1,3 +1,7 @@
+<?php
+if (isset($_SESSION["LoggedUserId"])) {
+    unset($_SESSION["LoggedUserId"]);}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,13 +9,13 @@
     <title>Prihlásenie</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="Styles.css" type="text/css">
+    <link rel="stylesheet" href="/RJ-Music/Styles.css" type="text/css">
 </head>
 <body>
 <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
-            <h1><img src="/Resources/Images/RJ_Music_500x500.png" alt="" width="70" height="70" class="d-inline-block align-text-top">   Radoslav Joob</h1>
+            <h1><img src="/RJ-Music//Resources/Images/RJ_Music_500x500.png" alt="" width="70" height="70" class="d-inline-block align-text-top">   Radoslav Joob</h1>
         </a>
         <a class="navbar-brand" href="#"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,43 +24,43 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#" >Domov</a>
+                    <a class="nav-link" aria-current="page" href="/RJ-Music/Home.php" >Domov</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">O mne</a>
+                    <a class="nav-link" href="/RJ-Music/About.php">O mne</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Diskografia</a>
+                    <a class="nav-link" href="/RJ-Music/Discography.php">Diskografia</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Prihlásenie</a>
+                    <a class="nav-link active" href="/RJ-Music/Login.php">Prihlásenie</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
-<div class="container col-xl-4 col-md-6 col-sm-8" id="loginContainer">
+<div  class="container col-xl-3 col-md-5 col-sm-7" id="loginContainer">
     <div class="row">
+
+        <p style="color: red "><?= ($_SESSION["ServerMessages"] ?? "")?></p>
         <h2>Prihlásenie</h2>
-        <form method="post">
-            <div class="mt-2">
-                <label for="usernameForm" class="form-label">Používateľské meno:</label>
-                <input type="text" id="usernameForm" class="form-control" name="user_name" value="" required="required">
+        <form method="post" enctype="application/x-www-form-urlencoded" action="/RJ-Music/UserController.php">
+            <div class="mt-2 ">
+                <label for="usernameMailForm" class="form-label">Používateľské meno / email:</label>
+                <input type="text" id="usernameMailForm" class="form-control" name="user_name_mail" value="" required="required" minlength="3" maxlength="30" >
             </div>
             <div class="mt-2">
                 <label for="passForm" class="form-label">Heslo:</label>
-                <input type="password" id="passForm" class="form-control" name="password" value="" required="required">
+                <input type="password" id="passForm" class="form-control" name="password" value="" required="required" minlength="3" maxlength="30">
             </div>
-
-            <button type="submit" class="btn btn-primary" id="buttonloginForm">Prihlásiť</button>
+            <button type="submit" class="btn btn-primary" id="buttonForm">Prihlásiť</button>
         </form>
     </div>
-
     <div class="row" id="forgotPassworDrow">
-        <a href="#" class="blacklink">Zabudol si heslo?</a>
+        <a href="#" class="blacklink">Obnoviť heslo</a>
     </div>
     <div class="row" id="registration">
-        <a href="#" class="blacklink">Som nový používateľ?</a>
+        <a href="/RJ-Music/Registration.php" class="blacklink">Registrácia</a>
     </div>
 </div>
 </body>
