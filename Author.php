@@ -3,10 +3,9 @@
 class Author
 {
     private int $id;
-    private $firstname;
-    private $lastname;
-    private $imageFilename;
-
+    public $firstname;
+    public $lastname;
+    public $imageFilename;
     /**
      * @return mixed
      */

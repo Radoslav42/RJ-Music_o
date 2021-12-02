@@ -1,6 +1,11 @@
 <?php
  require_once "AuthorsController.php";
 $authorsController = new AuthorsController();
+$author = new Author();
+$author->firstname = "Rado";
+
+$pokus = "pokus";
+$b = json_encode($author);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,16 +41,36 @@ $authorsController = new AuthorsController();
             </div>
         </div>
     </nav>
-<div class="container">
-    <div class="row justify-content-md-center">
-        <?php foreach ($authorsController->GetAllAuthors() as $author) { ?>
-                <div class="col-4">
+    <div>
+        <p>Hľadaj:</p>
+        <input type="text" id="FindInput" width="500"  oninput="TextChange(this.value)">
+        <p>Počet vyskytov:</p>
+        <input type="text" id="countFindings" value="0" readonly>
+        <script >
+            var authors = JSON.parse('<?= json_encode($authorsController->GetAllAuthors()); ?>');
+
+            function TextChange(inputText){
+                count = 0;
+                for (i = 0; i < authors.length; i++)
+                {
+                    if (authors[i].firstname.includes(inputText) || authors[i].lastname.includes(inputText))
+                        count++;
+                }
+                $countFindings = document.getElementById("countFindings");
+                $countFindings.value = count;
+            }
+        </script>
+    </div>
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <?php foreach ($authorsController->GetAllAuthors() as $author) { ?>
+                <div class="col-8">
                     <img src="<?= $author->getImageFilename() ?>"
                     <p>
                     <h2><?=$author->getFirstname()?> <?=$author->getLastname()?></h2>
                 </div>
             <?php } ?>
+        </div>
     </div>
-</div>
 </body>
 </html>

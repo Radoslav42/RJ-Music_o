@@ -41,7 +41,6 @@ if (isset($_SESSION["LoggedUserId"])) {
 </nav>
 <div  class="container col-xl-3 col-md-5 col-sm-7" id="loginContainer">
     <div class="row">
-
         <p style="color: red "><?= ($_SESSION["ServerMessages"] ?? "")?></p>
         <h2>Prihlásenie</h2>
         <form method="post" enctype="application/x-www-form-urlencoded" action="/RJ-Music/UserController.php">
