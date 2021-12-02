@@ -33,7 +33,7 @@ class UserController
                 require_once "Login.php";
             }
         }
-        else if ($this->HasRequiredRegistration() && $this->ValidateEmail($_POST['email']))
+        else if ($this->HasRequiredRegistration())
         {
             $this->user->setUsername($_POST['user_name']);
             $this->user->setEmail($_POST['email']);
@@ -86,17 +86,36 @@ class UserController
         else
             return null;
     }
+
     public function HasRequiredUpdateUser()
     {
-        return isset($_POST['updateUserButton']);
+        return isset($_POST['updateUserButton']) && $this->ValidateLengthFrom3To30Characters($_POST['user_name']) &&  $this->ValidateLengthFrom3To30Characters($_POST['email']);
     }
     public function HasRequiredLogin()
     {
-        return isset($_POST['user_name_mail']) && isset($_POST['password']);
+        return isset($_POST['user_name_mail']) && isset($_POST['password']) &&  $this->ValidateLengthFrom3To30Characters($_POST['user_name_mail'])  &&  $this->ValidateLengthFrom3To30Characters($_POST['password']);
     }
     public function HasRequiredRegistration()
     {
-        return isset($_POST['user_name']) && isset($_POST['email']) && isset($_POST['password']);
+        return isset($_POST['user_name']) && isset($_POST['email']) && isset($_POST['password']) && $this->ValidateEmail($_POST['email']) &&  $this->ValidateLengthFrom3To30Characters($_POST['user_name']) && $this->ValidateLengthFrom3To30Characters($_POST['email']) &&  $this->ValidateLengthFrom3To30Characters($_POST['password']);
+    }
+    public function ValidateLengthFrom3To30Characters($str)
+    {
+        if (!$this->IsEmptyString($str))
+            return strlen($str) >= 3 && strlen($str) <= 30;
+        else {
+            $_SESSION["ServerMessages"] = "Nesprávna dľžka retazca!";
+            return false;
+        }
+    }
+    public function IsEmptyString($str)
+    {
+        if ($str != null)
+            return strlen($str) == 0;
+        else {
+            $_SESSION["ServerMessages"] = "Prázdny reťazec!";
+            return false;
+        }
     }
     public function ValidateEmail($email)
     {
